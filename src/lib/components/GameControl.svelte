@@ -12,33 +12,33 @@
 	$: score = app.game.score;
 </script>
 
-<div class="control card p-4 variant-glass-primary">
-	<div class="w-full text-center text-5xl font-extrabold mb-2 m-0 p-0">TOPOBAAS</div>
+<div class="w-full md:w-auto absolute md:top-5 md:left-5 top-0 left-0 flex flex-col gap-0.5rem card p-4 variant-glass-primary">
+	<div class="w-full text-center text-xl md:text-5xl font-extrabold mb-2 m-0 p-0">TOPOBAAS</div>
 
 	<RadioGroup class="mb-2">
-		<RadioItem bind:group={$difficulty} name="justify" value={0}>{difficulties[0]}</RadioItem>
-		<RadioItem bind:group={$difficulty} name="justify" value={1}>{difficulties[1]}</RadioItem>
-		<RadioItem bind:group={$difficulty} name="justify" value={2}>{difficulties[2]}</RadioItem>
-		<RadioItem bind:group={$difficulty} name="justify" value={3}>{difficulties[3]}</RadioItem>
-		<RadioItem bind:group={$difficulty} name="justify" value={4}>{difficulties[4]}</RadioItem>
+		<RadioItem class="text-sm md:text-base" bind:group={$difficulty} name="justify" value={0}>{difficulties[0]}</RadioItem>
+		<RadioItem class="text-sm md:text-base" bind:group={$difficulty} name="justify" value={1}>{difficulties[1]}</RadioItem>
+		<RadioItem class="text-sm md:text-base" bind:group={$difficulty} name="justify" value={2}>{difficulties[2]}</RadioItem>
+		<RadioItem class="text-sm md:text-base" bind:group={$difficulty} name="justify" value={3}>{difficulties[3]}</RadioItem>
+		<RadioItem class="text-sm md:text-base" bind:group={$difficulty} name="justify" value={4}>{difficulties[4]}</RadioItem>
 	</RadioGroup>
 
 	<hr class="!border-t-2 border-red-500" />
 
 	<div class="relative">
 		{#if $finished}
-			<div class="text-xl font-light text-center">
+			<div class="md:text-xl text-l font-light text-center">
 				Einde spel <br />
 				{$score} punten * {difficulties[$difficulty]} multiplier
 			</div>
-			<div class="text-2xl font-semibold text-center">
+			<div class="md:text-2xl text-l font-semibold text-center">
 				Score: {Math.round($score * (1 + $difficulty / 10))}
 			</div>
 		{:else}
-			<div class="absolute bottom-0 right-0 text-sm font-light">
+			<div class="absolute bottom-0 right-0 md:text-sm text-xs font-light">
 				{roundText}
 			</div>
-			<div class="mb-2 mt-2 text-xl font-semibold text-center">
+			<div class="mb-2 mt-2 md:text-xl text-l font-semibold text-center">
 				{$currentRound ? `${$currentRound.feature.properties.name}` : 'Geen spel gestart'}
 			</div>
 		{/if}
@@ -47,7 +47,7 @@
 	<hr class="!border-t-2 border-red-500" />
 
 	{#if !$finished}
-		<div class="stats w-full text-center text-xl font-semibold">
+		<div class="stats w-full text-center md:text-xl text-l font-semibold">
 			<div>
 				Score: {$score}
 			</div>
