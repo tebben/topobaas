@@ -3,14 +3,13 @@
 	import { onMount } from 'svelte';
 	import { app } from '$lib/app';
 
-	import 'maplibre-gl/dist/maplibre-gl.css';
 	import maplibregl from 'maplibre-gl';
 	import * as pmtiles from 'pmtiles';
 
-	let protocol = new pmtiles.Protocol();
-	maplibregl.addProtocol('pmtiles', protocol.tile);
-
 	onMount(() => {
+		let protocol = new pmtiles.Protocol();
+		maplibregl.addProtocol('pmtiles', protocol.tile);
+
 		createMap();
 	});
 

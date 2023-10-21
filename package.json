@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^2.0.0",
+    "@sveltejs/adapter-static": "^2.0.0",
     "@sveltejs/kit": "^1.20.4",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
@@ -40,7 +41,7 @@
   "dependencies": {
     "@floating-ui/dom": "1.5.3",
     "maplibre-gl": "3.5.1",
-    "pmtiles": "^2.10.0",
+    "pmtiles": "^2.11.0",
     "@turf/turf": "6.5.0"
   }
 }

@@ -9,6 +9,6 @@ body {
 }
 
 .maplibregl-ctrl-bottom-right {
-    background-color: black;
-    opacity: 0.3;
+    background-color: black !important;
+    opacity: 0.3 !important;
 }
