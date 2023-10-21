@@ -2,6 +2,7 @@
 	import '../app.postcss';
 	import './style.css';
 	import 'maplibre-gl/dist/maplibre-gl.css';
+	import Analytics from '$lib/analytics.svelte'
 
 	// Floating UI for Popups
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
@@ -9,6 +10,7 @@
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 </script>
 
+<Analytics />
 <slot />
 
 <style>

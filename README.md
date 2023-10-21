@@ -1,6 +1,6 @@
 # topobaas
 
-A quickly thrown together small topo game since woonplaatsgame seems to be offline.
+A quickly thrown together small Dutch topo game since woonplaatsgame seems to be offline.
 
 visit [TOPOBAAS](https://tebben.github.io/topobaas) on github pages.
 
@@ -8,7 +8,7 @@ visit [TOPOBAAS](https://tebben.github.io/topobaas) on github pages.
 
 ## Woonplaats data
 
-We get woonplaats data from the BAG and rank woonplaats by the amount of BAG objects in a `woonplaats`, we can use the rank for the diffuculty level. The ranking is not perfect yet...
+We get places from the BAG and rank a place by the amount of BAG objects in a `woonplaats`, we can use the rank for the diffuculty level. The ranking is not perfect yet...
 
 Query to create GeoJSON.
 
@@ -17,7 +17,7 @@ WITH places AS (
     SELECT 
         t1.gid as id, 
         t1.woonplaatsnaam as name, 
-        ST_AsGeoJSON(ST_Transform( ST_SimplifyPreserveTopology(t1.geovlak, 500), 4326), 5)::json as geom,
+        ST_AsGeoJSON(ST_Transform(ST_SimplifyPreserveTopology(t1.geovlak, 500), 4326), 5)::json as geom,
         (SELECT COUNT(*) FROM bagactueel.pand WHERE ST_Contains(t1.geovlak, pand.geovlak)) AS building_count
     FROM 
         bagactueel.woonplaats t1
