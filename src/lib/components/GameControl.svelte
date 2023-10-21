@@ -10,9 +10,13 @@
 	$: previousRound = app.game.previousRound;
 	$: roundText = `${$currentRound ? $currentRound.index + 1 : 0}/${$nrRounds}`;
 	$: score = app.game.score;
+
+	function retry(): void {
+		app.game.start();
+	}
 </script>
 
-<div class="w-full md:w-auto absolute md:top-5 md:left-5 top-0 left-0 flex flex-col gap-0.5rem card p-4 variant-glass-primary">
+<div class="w-full md:w-auto absolute md:top-5 md:left-5 top-0 left-0 flex flex-col gap-0.5rem card p-4 variant-glass-primary md:rounded-lg rounded-none">
 	<div class="w-full text-center text-xl md:text-5xl font-extrabold mb-2 m-0 p-0">TOPOBAAS</div>
 
 	<RadioGroup class="mb-2">
@@ -53,7 +57,7 @@
 			</div>
 		</div>
 		{:else}
-		<button type="button" class="btn variant-filled mb-2 mt-2" >NOG EEN KEER!!?!</button>
+		<button type="button" class="btn variant-filled mb-2 mt-2" on:click={retry}>NOG EEN KEER!!?!</button>
 	{/if}
 
 	{#if $previousRound}
@@ -74,15 +78,6 @@
 </div>
 
 <style>
-	.control {
-		position: absolute;
-		top: 20px;
-		left: 20px;
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-
 	.stats {
 		display: flex;
 		gap: 2rem;

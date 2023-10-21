@@ -20,6 +20,7 @@
 			maxPitch: 0,
 			bearing: 0,
 			dragRotate: false,
+			touchZoomRotate: false,
 			style: {
 				version: 8,
 				glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',

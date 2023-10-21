@@ -103,13 +103,21 @@ export class Game {
     }
 
     private resetMapPosition(): void {
-        const initialPosition = {
+        /* const initialPosition = {
             center: [5.164, 52.266],
             zoom: 7.2
           };
           
           // @ts-ignore
-          this.map?.flyTo(initialPosition);
+          this.map?.flyTo(initialPosition); */
+
+          //,
+          var bounds = [
+            [3.31497114423, 50.803721015], // Southwest coordinates
+            [ 7.09205325687, 53.5104033474] // Northeast coordinates
+          ];
+          // @ts-ignore
+          this.map?.fitBounds(bounds, {padding: 40 });
         }
 
 
@@ -152,7 +160,7 @@ export class Game {
         });
     }
 
-    private start(difficulty: number) {
+    public start(difficulty: number = get(this.difficulty)) {
         this.rounds = [];
         this.createRounds(difficulty, get(this.nrRounds));
         this.currentRound.set(this.rounds[0]);
