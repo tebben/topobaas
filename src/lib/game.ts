@@ -61,15 +61,13 @@ export class Game {
         // check if point intersects with feature, if so score = max
         if (!turf.booleanPointInPolygon(point, round.feature)) {
             let feature;
-            if (round.feature.geometry.type === 'MultiPolygon') {
+            if (round.feature.geometry.type === 'MultiPolygon' || round.feature.geometry.coordinates.length >= 2) {
                 feature = turf.convex(round.feature);
             } else {
                 feature = round.feature;
             }
 
-            // get first if polygon has holes
-            const polygon = feature.geometry.coordinates.length >= 2 ? turf.polygon(feature.geometry.coordinates[0]) : feature;
-            const polygonToLine = turf.polygonToLine(polygon);
+            const polygonToLine = turf.polygonToLine(feature);
 
             // @ts-ignore
             round.distance = Math.round(turf.pointToLineDistance(point, polygonToLine, { units: 'meters' }));
@@ -86,6 +84,8 @@ export class Game {
 
         // add place to features to show on map
         this.placeFeatures.push(round.feature);
+
+        console.log(round.feature);
 
         // add clicked location to features to show on map
         const clickedFeature = turf.point([location.lng, location.lat]);

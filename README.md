@@ -4,6 +4,8 @@ A quickly thrown together small topo game since woonplaatsgame seems to be offli
 
 visit [TOPOBAAS](https://tebben.github.io/topobaas) on github pages.
 
+![Topobaas](./img/topobaas.jpg)
+
 ## Woonplaats data
 
 We get woonplaats data from the BAG and rank woonplaats by the amount of BAG objects in a `woonplaats`, we can use the rank for the diffuculty level. The ranking is not perfect yet...
