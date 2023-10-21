@@ -59,9 +59,7 @@ export class Game {
         const point = turf.point([location.lng, location.lat]);
 
         // check if point intersects with feature, if so score = max
-        const intersect = turf.booleanPointInPolygon(point, round.feature);
-
-        if (!intersect) {
+        if (!turf.booleanPointInPolygon(point, round.feature)) {
             let feature;
             if (round.feature.geometry.type === 'MultiPolygon') {
                 feature = turf.convex(round.feature);
@@ -72,11 +70,14 @@ export class Game {
             // get first if polygon has holes
             const polygon = feature.geometry.coordinates.length >= 2 ? turf.polygon(feature.geometry.coordinates[0]) : feature;
             const polygonToLine = turf.polygonToLine(polygon);
+
             // @ts-ignore
             round.distance = Math.round(turf.pointToLineDistance(point, polygonToLine, { units: 'meters' }));
 
+            const minScore = 0;
+            const maxScore = 100;
             const maxDistance = 100000;
-            round.score = Math.round(Math.max(0, 100 - (round.distance / maxDistance) * 100));
+            round.score = Math.round(Math.max(minScore, maxScore - (round.distance / maxDistance) * maxScore));
         } else {
             round.distance = 0;
             round.score = 100;
@@ -103,21 +104,14 @@ export class Game {
     }
 
     private resetMapPosition(): void {
-        /* const initialPosition = {
-            center: [5.164, 52.266],
-            zoom: 7.2
-          };
-          
-          // @ts-ignore
-          this.map?.flyTo(initialPosition); */
+        let bearing = get(this.difficulty) === this.difficultyMap.length - 1 ? Math.random() * 360 : 0;
 
-          //,
           var bounds = [
             [3.31497114423, 50.803721015], // Southwest coordinates
             [ 7.09205325687, 53.5104033474] // Northeast coordinates
           ];
           // @ts-ignore
-          this.map?.fitBounds(bounds, {padding: 40 });
+          this.map?.fitBounds(bounds, {padding: 40, bearing: bearing });
         }
 
 
@@ -171,12 +165,6 @@ export class Game {
         this.clickedToPlaceFeatures = [];
         this.updateMap();
         this.finished.set(false);
-
-        if(difficulty === this.difficultyMap.length - 1) {
-            this.map?.setBearing(160);
-        } else {
-            this.map?.setBearing(0);
-        }
 
         this.resetMapPosition();
     }
