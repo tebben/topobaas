@@ -1,6 +1,8 @@
 # topobaas
 
-A quickly thrown together small topo game since woonplaatsgame looks to be offline.
+A quickly thrown together small topo game since woonplaatsgame seems to be offline.
+
+visit [TOPOBAAS](https://tebben.github.io/topobaas) on github pages.
 
 ## Woonplaats data
 
