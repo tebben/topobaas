@@ -72,10 +72,13 @@ export class Game {
             // @ts-ignore
             round.distance = Math.round(turf.pointToLineDistance(point, polygonToLine, { units: 'meters' }));
 
-            const minScore = 0;
-            const maxScore = 100;
-            const maxDistance = 100000;
-            round.score = Math.round(Math.max(minScore, maxScore - (round.distance / maxDistance) * maxScore));
+            //const minScore = 0;
+            //const maxScore = 100;
+            //const maxDistance = 30000;
+            //round.score = Math.round(Math.max(minScore, maxScore - (round.distance / maxDistance) * maxScore));
+
+            round.score = this.calculateScore(100, round.distance, 20000)
+            //round.score = Math.round(maxScore * (1 - round.distance/maxDistance))
         } else {
             round.distance = 0;
             round.score = 100;
@@ -101,6 +104,10 @@ export class Game {
         this.nextRound();
         this.updateMap();
         this.resetMapPosition();
+    }
+
+    private calculateScore(maxScore: number, distance: number, scalingFactor: number): number {
+        return Math.round(maxScore * Math.exp(-distance / scalingFactor));
     }
 
     private resetMapPosition(): void {
