@@ -11,11 +11,11 @@ export class Game {
     private clickedFeatures: Array<any> = [];
     private clickedToPlaceFeatures: Array<any> = [];
     private difficultyMap = [
-        [10, 10],
-        [9, 10],
-        [7, 10],
-        [3, 7],
-        [1, 4]
+        [20, 20],
+        [19, 20],
+        [17, 20],
+        [8, 17],
+        [1, 16]
     ];
 
     public rounds: Array<Round>;
@@ -78,17 +78,13 @@ export class Game {
             //round.score = Math.round(Math.max(minScore, maxScore - (round.distance / maxDistance) * maxScore));
 
             round.score = this.calculateScore(100, round.distance, 20000)
-            //round.score = Math.round(maxScore * (1 - round.distance/maxDistance))
         } else {
             round.distance = 0;
             round.score = 100;
         }
 
-
         // add place to features to show on map
         this.placeFeatures.push(round.feature);
-
-        console.log(round.feature);
 
         // add clicked location to features to show on map
         const clickedFeature = turf.point([location.lng, location.lat]);
@@ -182,8 +178,16 @@ export class Game {
             return place.properties.rank >= ranks[0] && place.properties.rank <= ranks[1];
         });
 
+        const indexUsed = new Array<number>();
         for (let i = 0; i < nrRounds; i++) {
-            const randomIndex = Math.floor(Math.random() * places.length);
+            let randomIndex = Math.floor(Math.random() * places.length);
+            
+            while (indexUsed.includes(randomIndex)) {
+                randomIndex = Math.floor(Math.random() * places.length);
+            }
+
+            indexUsed.push(randomIndex);
+            
             this.rounds.push(new Round(i, places[randomIndex]));
             places.splice(randomIndex, 1);
         }
